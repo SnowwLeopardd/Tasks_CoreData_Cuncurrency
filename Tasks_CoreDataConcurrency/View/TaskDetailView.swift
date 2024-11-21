@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct SingleTaskCoreDataDetailView: View {
+struct TaskDetailView: View {
     
     let singleTaskCoreData: SingleTaskCoreData
     
@@ -19,7 +19,7 @@ struct SingleTaskCoreDataDetailView: View {
                 LabeledContent {
                     Text(singleTaskCoreData.title)
                 } label: {
-                    Text("title)
+                    Text("title")
                 }
                 
             }

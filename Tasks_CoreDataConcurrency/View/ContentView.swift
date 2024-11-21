@@ -17,10 +17,10 @@ struct ContentView: View {
         NavigationStack {
             List {
                 ForEach(tasksCoreData) { task in
-                    SingleTaskCoreDataRowView(singleTaskCoreData: task, provider: provider)
+                    TaskRowView(singleTaskCoreData: task, provider: provider)
                     
                     ZStack(alignment: .leading) {
-                        NavigationLink(destination: SingleTaskCoreDataDetailView(singleTaskCoreData: task)) {
+                        NavigationLink(destination: TaskDetailView(singleTaskCoreData: task)) {
                             EmptyView()
                         }
                         .opacity(0)
