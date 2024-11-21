@@ -7,12 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		5351122C2CEFDBFA00686B04 /* SingleTaskCoreData.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 5351122A2CEFDBFA00686B04 /* SingleTaskCoreData.xcdatamodeld */; };
+		5351122C2CEFDBFA00686B04 /* TaskCoreData.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 5351122A2CEFDBFA00686B04 /* TaskCoreData.xcdatamodeld */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		535112042CEFCEF700686B04 /* Tasks_CoreDataConcurrency.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Tasks_CoreDataConcurrency.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		5351122B2CEFDBFA00686B04 /* SingleTaskCoreData.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = SingleTaskCoreData.xcdatamodel; sourceTree = "<group>"; };
+		5351122B2CEFDBFA00686B04 /* TaskCoreData.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = TaskCoreData.xcdatamodel; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -37,7 +37,7 @@
 		535111FB2CEFCEF700686B04 = {
 			isa = PBXGroup;
 			children = (
-				5351122A2CEFDBFA00686B04 /* SingleTaskCoreData.xcdatamodeld */,
+				5351122A2CEFDBFA00686B04 /* TaskCoreData.xcdatamodeld */,
 				535112062CEFCEF700686B04 /* Tasks_CoreDataConcurrency */,
 				535112052CEFCEF700686B04 /* Products */,
 			);
@@ -125,7 +125,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5351122C2CEFDBFA00686B04 /* SingleTaskCoreData.xcdatamodeld in Sources */,
+				5351122C2CEFDBFA00686B04 /* TaskCoreData.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -333,13 +333,13 @@
 /* End XCConfigurationList section */
 
 /* Begin XCVersionGroup section */
-		5351122A2CEFDBFA00686B04 /* SingleTaskCoreData.xcdatamodeld */ = {
+		5351122A2CEFDBFA00686B04 /* TaskCoreData.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
-				5351122B2CEFDBFA00686B04 /* SingleTaskCoreData.xcdatamodel */,
+				5351122B2CEFDBFA00686B04 /* TaskCoreData.xcdatamodel */,
 			);
-			currentVersion = 5351122B2CEFDBFA00686B04 /* SingleTaskCoreData.xcdatamodel */;
-			path = SingleTaskCoreData.xcdatamodeld;
+			currentVersion = 5351122B2CEFDBFA00686B04 /* TaskCoreData.xcdatamodel */;
+			path = TaskCoreData.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
 		};

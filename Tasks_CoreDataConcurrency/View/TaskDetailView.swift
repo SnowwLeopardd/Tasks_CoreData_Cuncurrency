@@ -1,5 +1,5 @@
 //
-//  SingleTaskCoreDataDetailView.swift
+//  TaskCoreDataDetailView.swift
 //  Tasks_CoreDataConcurrency
 //
 //  Created by Aleksandr Bochkarev on 11/21/24.
@@ -9,7 +9,7 @@ import SwiftUI
 
 struct TaskDetailView: View {
     
-    let singleTaskCoreData: SingleTaskCoreData
+    let taskCoreData: TaskCoreData
     
     var body: some View {
         List {
@@ -17,7 +17,7 @@ struct TaskDetailView: View {
             Section("General") {
                 
                 LabeledContent {
-                    Text(singleTaskCoreData.title)
+                    Text(taskCoreData.title)
                 } label: {
                     Text("title")
                 }

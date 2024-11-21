@@ -12,7 +12,7 @@ struct Tasks_CoreDataConcurrencyApp: App {
     var body: some Scene {
         WindowGroup {
             ContentView()
-                .environment(\.managedObjectContext, SingleTaskCoreDataProvider.shared.viewContext)
+                .environment(\.managedObjectContext, TaskCoreDataProvider.shared.viewContext)
         }
     }
 }

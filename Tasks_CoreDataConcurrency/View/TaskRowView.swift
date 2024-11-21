@@ -1,5 +1,5 @@
 //
-//  SingleTaskCoreDataRowView.swift
+//  TaskCoreDataRowView.swift
 //  Tasks_CoreDataConcurrency
 //
 //  Created by Aleksandr Bochkarev on 11/21/24.
@@ -10,8 +10,8 @@ import SwiftUI
 struct TaskRowView: View {
     
     @Environment(\.managedObjectContext) private var moc
-    @ObservedObject var singleTaskCoreData: SingleTaskCoreData
-    let provider: SingleTaskCoreDataProvider
+    @ObservedObject var taskCoreData: TaskCoreData
+    let provider: TaskCoreDataProvider
     
     var body: some View {
         ZStack {
@@ -19,24 +19,24 @@ struct TaskRowView: View {
                 Button {
                     toggleCompleted()
                 } label: {
-                    Image(systemName: singleTaskCoreData.completed ? "checkmark.circle.fill" : "circle")
-                        .foregroundColor(singleTaskCoreData.completed ? .yellow : .gray)
+                    Image(systemName: taskCoreData.completed ? "checkmark.circle.fill" : "circle")
+                        .foregroundColor(taskCoreData.completed ? .yellow : .gray)
                         .padding(.top, 5)
                 }
                 .buttonStyle(.plain)
                 
                 VStack(alignment: .leading) {
-                    Text(singleTaskCoreData.title)
-                        .strikethrough(singleTaskCoreData.completed, color: .gray)
-                        .foregroundColor(singleTaskCoreData.completed ? .gray : .black)
+                    Text(taskCoreData.title)
+                        .strikethrough(taskCoreData.completed, color: .gray)
+                        .foregroundColor(taskCoreData.completed ? .gray : .black)
                         .font(.headline)
                     
-                    Text(singleTaskCoreData.todo)
+                    Text(taskCoreData.todo)
                         .lineLimit(2)
-                        .foregroundColor(singleTaskCoreData.completed ? .gray : .black)
+                        .foregroundColor(taskCoreData.completed ? .gray : .black)
                         .font(.subheadline)
                     
-                    Text(DateFormatter.convertDateToString(from: singleTaskCoreData.date))
+                    Text(DateFormatter.convertDateToString(from: taskCoreData.date))
                         .font(.footnote)
                         .foregroundColor(.gray)
                 }
@@ -54,7 +54,7 @@ struct TaskRowView: View {
 private extension TaskRowView {
     
     func toggleCompleted() {
-        singleTaskCoreData.completed.toggle()
+        taskCoreData.completed.toggle()
         do {
             if moc.hasChanges {
                 try moc.save()

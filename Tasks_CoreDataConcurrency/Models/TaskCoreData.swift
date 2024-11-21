@@ -8,7 +8,7 @@
 import Foundation
 import CoreData
 
-final class SingleTaskCoreData: NSManagedObject, Identifiable {
+final class TaskCoreData: NSManagedObject, Identifiable {
     
     @NSManaged var apiId: Int64
     @NSManaged var completed: Bool
@@ -31,16 +31,16 @@ final class SingleTaskCoreData: NSManagedObject, Identifiable {
     }
 }
 
-extension SingleTaskCoreData {
+extension TaskCoreData {
     
-    private static var singleTasksCoreDataFetchRequest: NSFetchRequest<SingleTaskCoreData> {
-        NSFetchRequest(entityName: "SingleTaskCoreData")
+    private static var tasksCoreDataFetchRequest: NSFetchRequest<TaskCoreData> {
+        NSFetchRequest(entityName: "TaskCoreData")
     }
     
-    static func all() -> NSFetchRequest<SingleTaskCoreData> {
-        let request: NSFetchRequest<SingleTaskCoreData> = singleTasksCoreDataFetchRequest
+    static func all() -> NSFetchRequest<TaskCoreData> {
+        let request: NSFetchRequest<TaskCoreData> = tasksCoreDataFetchRequest
         request.sortDescriptors = [
-            NSSortDescriptor(keyPath: \SingleTaskCoreData.title, ascending: true)
+            NSSortDescriptor(keyPath: \TaskCoreData.title, ascending: true)
         ]
         return request
     }

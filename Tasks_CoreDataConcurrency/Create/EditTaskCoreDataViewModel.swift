@@ -8,15 +8,15 @@
 import Foundation
 import CoreData
 
-final class EditSingleTaskCoreDataViewModel: ObservableObject {
+final class EditTaskCoreDataViewModel: ObservableObject {
     
-    @Published var singleTaskCoreData: SingleTaskCoreData
+    @Published var taskCoreData: TaskCoreData
     
     private let context: NSManagedObjectContext
 
-    init(provider: SingleTaskCoreDataProvider, singleTaskCoreData: SingleTaskCoreData? = nil) {
+    init(provider: TaskCoreDataProvider, taskCoreData: TaskCoreData? = nil) {
         self.context = provider.newContext
-        self.singleTaskCoreData =  SingleTaskCoreData(context: self.context)
+        self.taskCoreData =  TaskCoreData(context: self.context)
     }
     
     func save() throws {

@@ -8,19 +8,19 @@
 import SwiftUI
 
 struct ContentView: View {
-    @State private var isShowingNewSingleTaskCoreData = false
-    @FetchRequest(fetchRequest: SingleTaskCoreData.all()) private var tasksCoreData
+    @State private var isShowingNewTaskCoreData = false
+    @FetchRequest(fetchRequest: TaskCoreData.all()) private var tasksCoreData
     
-    var provider = SingleTaskCoreDataProvider.shared
+    var provider = TaskCoreDataProvider.shared
     
     var body: some View {
         NavigationStack {
             List {
                 ForEach(tasksCoreData) { task in
-                    TaskRowView(singleTaskCoreData: task, provider: provider)
+                    TaskRowView(taskCoreData: task, provider: provider)
                     
                     ZStack(alignment: .leading) {
-                        NavigationLink(destination: TaskDetailView(singleTaskCoreData: task)) {
+                        NavigationLink(destination: TaskDetailView(taskCoreData: task)) {
                             EmptyView()
                         }
                         .opacity(0)
@@ -30,15 +30,15 @@ struct ContentView: View {
             .toolbar {
                 ToolbarItem(placement: .topBarTrailing) {
                     Button {
-                        isShowingNewSingleTaskCoreData.toggle()
+                        isShowingNewTaskCoreData.toggle()
                     } label: {
                         Image(systemName: "plus")
                     }
                 }
             }
-            .sheet(isPresented: $isShowingNewSingleTaskCoreData) {
+            .sheet(isPresented: $isShowingNewTaskCoreData) {
                 NavigationStack {
-                    CreateSingleTaskCoreDataView(vm: .init(provider: provider))
+                    CreateTaskCoreDataView(vm: .init(provider: provider))
                 }
             }
             .navigationTitle(String(localized: "Tasks"))
