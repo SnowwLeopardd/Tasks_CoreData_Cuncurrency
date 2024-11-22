@@ -11,17 +11,24 @@ import CoreData
 final class EditTaskCoreDataViewModel: ObservableObject {
     
     @Published var taskCoreData: TaskCoreData
-    
     private let context: NSManagedObjectContext
+    private let provider: TaskCoreDataProvider
 
     init(provider: TaskCoreDataProvider, taskCoreData: TaskCoreData? = nil) {
+        self.provider = provider
         self.context = provider.newContext
-        self.taskCoreData =  TaskCoreData(context: self.context)
+        
+        if let taskCoreData,
+           let existingTaskCoreDataCopy = provider.exisits(taskCoreData,
+                                                           in: context) {
+            self.taskCoreData = existingTaskCoreDataCopy
+        } else {
+            self.taskCoreData = TaskCoreData(context: self.context)
+        }
+        
     }
     
     func save() throws {
-        if context.hasChanges {
-            try context.save()
-        }
+        try provider.persist(in: context)
     }
 }

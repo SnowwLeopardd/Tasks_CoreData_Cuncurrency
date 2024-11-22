@@ -44,6 +44,10 @@ extension TaskCoreData {
         ]
         return request
     }
+    // to do
+    static func filter(_ query: String) -> NSPredicate {
+        query.isEmpty ? NSPredicate(value: true) : NSPredicate(format: "title CONTAINS[cd] %@", query)
+    }
 }
 
 extension TaskCoreData {

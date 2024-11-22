@@ -13,6 +13,7 @@ struct TaskDetailView: View {
     @Environment(\.managedObjectContext) private var moc
     
     @ObservedObject var taskCoreData: TaskCoreData
+    @ObservedObject var vm: EditTaskCoreDataViewModel
     
     var body: some View {
         VStack(alignment: .leading) {
@@ -32,6 +33,7 @@ struct TaskDetailView: View {
 
 private extension TaskDetailView {
     func saveChanges() {
+        
         do {
             if moc.hasChanges {
                 try moc.save()
@@ -47,6 +49,6 @@ struct TaskDetailView_Previews: PreviewProvider {
     @State static var mockTasks: [TaskCoreData] = [.preview()]
 
        static var previews: some View {
-           TaskDetailView(path: $mockTasks, taskCoreData: .preview())
+           TaskDetailView(path: $mockTasks, taskCoreData: .preview(), vm: .init(provider: TaskCoreDataProvider.shared))
        }
 }

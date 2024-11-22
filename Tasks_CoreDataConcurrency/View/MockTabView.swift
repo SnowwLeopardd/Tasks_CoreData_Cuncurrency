@@ -9,7 +9,7 @@ import SwiftUI
 
 struct MockTabView: View {
     
-    var provider = TaskCoreDataProvider.shared
+    let provider = TaskCoreDataProvider.shared
     
     @FetchRequest(fetchRequest: TaskCoreData.all()) private var tasksCoreData
     
@@ -32,9 +32,9 @@ struct MockTabView: View {
     }
 }
 
-struct MockTabView_Previews: PreviewProvider {
-   static var previews: some View {
-       let preview = TaskCoreDataProvider.shared
-       MockTabView(provider: preview)
-   }
-}
+//struct MockTabView_Previews: PreviewProvider {
+//   static var previews: some View {
+//       let preview = TaskCoreDataProvider.shared
+//       MockTabView(provider: preview)
+//   }
+//}

@@ -9,10 +9,10 @@ import SwiftUI
 
 struct TaskRowView: View {
     @Binding var path: [TaskCoreData]
-    
     @Environment(\.managedObjectContext) private var moc
-    
     @ObservedObject var taskCoreData: TaskCoreData
+    
+    let provider: TaskCoreDataProvider
     
     var body: some View {
         ZStack {
@@ -37,6 +37,7 @@ struct TaskRowView: View {
                         .foregroundColor(taskCoreData.completed ? .gray : .black)
                         .font(.subheadline)
                     
+                    // to fix
                     Text(DateFormatter.convertDateToString(from: taskCoreData.date))
                         .font(.footnote)
                         .foregroundColor(.gray)
@@ -56,9 +57,7 @@ private extension TaskRowView {
     func toggleCompleted() {
         taskCoreData.completed.toggle()
         do {
-            if moc.hasChanges {
-                try moc.save()
-            }
+            try provider.persist(in: moc)
         } catch {
             print(error)
         }
@@ -67,8 +66,8 @@ private extension TaskRowView {
 
 struct TaskRowView_Previews: PreviewProvider {
     @State static var mockTasks: [TaskCoreData] = [.preview()]
-
        static var previews: some View {
-           TaskRowView(path: $mockTasks, taskCoreData: .preview())
+           let previewProvider = TaskCoreDataProvider.shared
+           TaskRowView(path: $mockTasks, taskCoreData: .preview(context: previewProvider.viewContext), provider: previewProvider)
        }
 }
