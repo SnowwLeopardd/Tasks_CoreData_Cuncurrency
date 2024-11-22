@@ -23,7 +23,6 @@ final class TaskCoreDataProvider {
     }
     
     private init() {
-        
         persistentContainer = NSPersistentContainer(name: "TaskCoreData")
         persistentContainer.viewContext.automaticallyMergesChangesFromParent = true
         persistentContainer.loadPersistentStores { _, error in

@@ -8,10 +8,11 @@
 import SwiftUI
 
 struct TaskRowView: View {
+    @Binding var path: [TaskCoreData]
     
     @Environment(\.managedObjectContext) private var moc
+    
     @ObservedObject var taskCoreData: TaskCoreData
-    let provider: TaskCoreDataProvider
     
     var body: some View {
         ZStack {
@@ -46,13 +47,12 @@ struct TaskRowView: View {
         .frame(maxWidth: .infinity, alignment: .leading)
         .contentShape(Rectangle())
         .onTapGesture {
-//            path.append(task)
+            path.append(taskCoreData)
         }
     }
 }
 
 private extension TaskRowView {
-    
     func toggleCompleted() {
         taskCoreData.completed.toggle()
         do {

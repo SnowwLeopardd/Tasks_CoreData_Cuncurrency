@@ -12,6 +12,7 @@ struct Tasks_CoreDataConcurrencyApp: App {
     var body: some Scene {
         WindowGroup {
             ContentView()
+                // inject viewContext into Environment
                 .environment(\.managedObjectContext, TaskCoreDataProvider.shared.viewContext)
         }
     }

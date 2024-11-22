@@ -8,21 +8,36 @@
 import SwiftUI
 
 struct TaskDetailView: View {
+    @Binding var path: [TaskCoreData]
     
-    let taskCoreData: TaskCoreData
+    @Environment(\.managedObjectContext) private var moc
+    
+    @ObservedObject var taskCoreData: TaskCoreData
     
     var body: some View {
-        List {
+        VStack(alignment: .leading) {
+            TextField(String(localized: "Header"), text: $taskCoreData.title)
             
-            Section("General") {
-                
-                LabeledContent {
-                    Text(taskCoreData.title)
-                } label: {
-                    Text("title")
-                }
-                
+            DatePicker(String(localized: "Date"), selection: $taskCoreData.date, displayedComponents: .date)
+                .labelsHidden()
+            
+            TextEditor(text: $taskCoreData.todo)
+        }
+        .padding(.horizontal, 16)
+        .onDisappear {
+            saveChanges()
+        }
+    }
+}
+
+private extension TaskDetailView {
+    func saveChanges() {
+        do {
+            if moc.hasChanges {
+                try moc.save()
             }
+        } catch {
+            print(error)
         }
     }
 }

@@ -8,40 +8,36 @@
 import SwiftUI
 
 struct ContentView: View {
-    @State private var isShowingNewTaskCoreData = false
     @FetchRequest(fetchRequest: TaskCoreData.all()) private var tasksCoreData
-    
-    var provider = TaskCoreDataProvider.shared
+    @State private var path = [TaskCoreData]()
     
     var body: some View {
-        NavigationStack {
+        NavigationStack(path: $path) {
             List {
                 ForEach(tasksCoreData) { task in
-                    TaskRowView(taskCoreData: task, provider: provider)
-                    
-                    ZStack(alignment: .leading) {
-                        NavigationLink(destination: TaskDetailView(taskCoreData: task)) {
-                            EmptyView()
+                    TaskRowView(path: $path, taskCoreData: task)
+                        .contextMenu {
+                            Button {
+                                path.append(task)
+                            } label: {
+                                Label(String(localized: "Edit"), systemImage: "pencil")
+                            }
+                            
+                            Button(role: .destructive) {
+                                // delete function
+                            } label: {
+                                Label(String(localized: "Delete"), systemImage: "trash")
+                            }
                         }
-                        .opacity(0)
-                    }
                 }
             }
-            .toolbar {
-                ToolbarItem(placement: .topBarTrailing) {
-                    Button {
-                        isShowingNewTaskCoreData.toggle()
-                    } label: {
-                        Image(systemName: "plus")
-                    }
-                }
-            }
-            .sheet(isPresented: $isShowingNewTaskCoreData) {
-                NavigationStack {
-                    CreateTaskCoreDataView(vm: .init(provider: provider))
-                }
-            }
+            .listStyle(PlainListStyle())
             .navigationTitle(String(localized: "Tasks"))
+            .navigationDestination(for: TaskCoreData.self, destination: { task in
+                TaskDetailView(path: $path, taskCoreData: task)
+            })
+            
+            MockTabView()
         }
     }
 }

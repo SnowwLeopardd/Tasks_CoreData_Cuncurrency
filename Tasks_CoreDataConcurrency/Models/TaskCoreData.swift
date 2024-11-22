@@ -22,7 +22,7 @@ final class TaskCoreData: NSManagedObject, Identifiable {
         super.awakeFromInsert()
         
         setPrimitiveValue(Int64(1234), forKey: "apiId")
-        setPrimitiveValue(true, forKey: "completed")
+        setPrimitiveValue(false, forKey: "completed")
         setPrimitiveValue(Date.now, forKey: "date")
         setPrimitiveValue(UUID(), forKey: "id")
         setPrimitiveValue("Primitive_title", forKey: "title")
