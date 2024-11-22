@@ -82,3 +82,12 @@ struct CreateTaskCoreDataView: View {
         }
     }
 }
+
+struct CreateTaskCoreDataView_Previews: PreviewProvider {
+   static var previews: some View {
+       let preview = TaskCoreDataProvider.shared
+       
+       CreateTaskCoreDataView(vm: .init(provider: preview))
+           .environment(\.managedObjectContext, preview.viewContext)
+   }
+}

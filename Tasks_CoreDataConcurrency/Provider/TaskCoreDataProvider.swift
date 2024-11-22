@@ -7,6 +7,7 @@
 
 import Foundation
 import CoreData
+import SwiftUI
 
 final class TaskCoreDataProvider {
     
@@ -24,11 +25,20 @@ final class TaskCoreDataProvider {
     
     private init() {
         persistentContainer = NSPersistentContainer(name: "TaskCoreData")
+        if EnvironmentValues.isPreview {
+            persistentContainer.persistentStoreDescriptions.first?.url = .init(fileURLWithPath: "/dev/null")
+        }
         persistentContainer.viewContext.automaticallyMergesChangesFromParent = true
         persistentContainer.loadPersistentStores { _, error in
             if let error {
                 fatalError("Failed to load persistent stores: \(error)")
             }
         }
+    }
+}
+
+extension EnvironmentValues {
+    static var isPreview: Bool {
+        return ProcessInfo.processInfo.environment["XCODE_RUNNING_FOR_PREVIEWS"] == "1"
     }
 }

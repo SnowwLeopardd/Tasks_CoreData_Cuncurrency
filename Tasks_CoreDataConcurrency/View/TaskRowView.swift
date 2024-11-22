@@ -64,3 +64,11 @@ private extension TaskRowView {
         }
     }
 }
+
+struct TaskRowView_Previews: PreviewProvider {
+    @State static var mockTasks: [TaskCoreData] = [.preview()]
+
+       static var previews: some View {
+           TaskRowView(path: $mockTasks, taskCoreData: .preview())
+       }
+}

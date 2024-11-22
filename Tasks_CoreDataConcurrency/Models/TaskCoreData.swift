@@ -45,3 +45,28 @@ extension TaskCoreData {
         return request
     }
 }
+
+extension TaskCoreData {
+    
+    @discardableResult
+    static func makePreview(count: Int, in context: NSManagedObjectContext) -> [TaskCoreData] {
+        var tasks = [TaskCoreData]()
+        
+        for i in 0..<count {
+            let task = TaskCoreData(context: context)
+            task.title = "Task \(i)"
+            task.todo = "Todo \(i)"
+            task.date = .now
+            tasks.append(task)
+        }
+        return tasks
+    }
+    
+    static func preview(context: NSManagedObjectContext = TaskCoreDataProvider.shared.viewContext) -> TaskCoreData {
+        return makePreview(count: 1, in: context)[0]
+    }
+    
+    static func empty(context: NSManagedObjectContext = TaskCoreDataProvider.shared.viewContext) -> TaskCoreData {
+        return TaskCoreData(context: context)
+    }
+}

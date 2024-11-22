@@ -31,3 +31,10 @@ struct MockTabView: View {
         .background(Color(.gray))
     }
 }
+
+struct MockTabView_Previews: PreviewProvider {
+   static var previews: some View {
+       let preview = TaskCoreDataProvider.shared
+       MockTabView(provider: preview)
+   }
+}

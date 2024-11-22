@@ -41,3 +41,12 @@ private extension TaskDetailView {
         }
     }
 }
+
+
+struct TaskDetailView_Previews: PreviewProvider {
+    @State static var mockTasks: [TaskCoreData] = [.preview()]
+
+       static var previews: some View {
+           TaskDetailView(path: $mockTasks, taskCoreData: .preview())
+       }
+}

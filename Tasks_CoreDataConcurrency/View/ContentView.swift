@@ -41,3 +41,14 @@ struct ContentView: View {
         }
     }
 }
+
+struct ContectView_Previews: PreviewProvider {
+    static var previews: some View {
+        let preview = TaskCoreDataProvider.shared
+        ContentView()
+            .environment(\.managedObjectContext, preview.viewContext)
+            .previewDisplayName("Contacts With Data")
+            .onAppear { TaskCoreData.makePreview(count: 7, in: preview.viewContext)
+            }
+    }
+}
