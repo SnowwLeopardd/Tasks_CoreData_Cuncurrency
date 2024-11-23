@@ -9,7 +9,7 @@ import SwiftUI
 
 struct TaskRowView: View {
     @Binding var path: [TaskCoreData]
-    @Environment(\.managedObjectContext) private var moc
+    @Environment(\.managedObjectContext) private var viewContext
     @ObservedObject var taskCoreData: TaskCoreData
     
     let provider: TaskCoreDataProvider
@@ -29,15 +29,15 @@ struct TaskRowView: View {
                 VStack(alignment: .leading) {
                     Text(taskCoreData.title)
                         .strikethrough(taskCoreData.completed, color: .gray)
-                        .foregroundColor(taskCoreData.completed ? .gray : .black)
+                        .foregroundColor(taskCoreData.completed ? .gray : .white)
                         .font(.headline)
                     
                     Text(taskCoreData.todo)
                         .lineLimit(2)
-                        .foregroundColor(taskCoreData.completed ? .gray : .black)
+                        .foregroundColor(taskCoreData.completed ? .gray : .white)
                         .font(.subheadline)
                     
-                    // to fix
+                    
                     Text(DateFormatter.convertDateToString(from: taskCoreData.date))
                         .font(.footnote)
                         .foregroundColor(.gray)
@@ -56,8 +56,9 @@ struct TaskRowView: View {
 private extension TaskRowView {
     func toggleCompleted() {
         taskCoreData.completed.toggle()
+        
         do {
-            try provider.persist(in: moc)
+            try provider.save(in: viewContext)
         } catch {
             print(error)
         }
@@ -66,6 +67,7 @@ private extension TaskRowView {
 
 struct TaskRowView_Previews: PreviewProvider {
     @State static var mockTasks: [TaskCoreData] = [.preview()]
+    
        static var previews: some View {
            let previewProvider = TaskCoreDataProvider.shared
            TaskRowView(path: $mockTasks, taskCoreData: .preview(context: previewProvider.viewContext), provider: previewProvider)

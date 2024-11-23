@@ -10,7 +10,7 @@ import SwiftUI
 struct CreateTaskCoreDataView: View {
     
     @Environment(\.dismiss) private var dismiss
-    @ObservedObject var vm: EditTaskCoreDataViewModel
+    @ObservedObject var editTaskCoreDataViewModel: EditTaskCoreDataViewModel
     @FocusState private var isFocused: Bool
 
     var body: some View {
@@ -34,7 +34,7 @@ struct CreateTaskCoreDataView: View {
                     Spacer()
                 }
                 
-                TextField(String(localized:"super_important_title"), text: $vm.taskCoreData.title)
+                TextField(String(localized:"super_important_title"), text: $editTaskCoreDataViewModel.taskCoreData.title)
                     .focused($isFocused)
                     .font(.headline)
                     .padding()
@@ -48,7 +48,7 @@ struct CreateTaskCoreDataView: View {
                     .font(.subheadline)
                     .foregroundColor(.black)
                 
-                TextField(String(localized:"Description_of_the_task"), text: $vm.taskCoreData.todo)
+                TextField(String(localized:"Description_of_the_task"), text: $editTaskCoreDataViewModel.taskCoreData.todo)
                     .font(.headline)
                     .padding()
                     .foregroundColor(Color(.black))
@@ -59,7 +59,7 @@ struct CreateTaskCoreDataView: View {
             
             Button(action: {
                 do {
-                    try vm.save()
+                    try editTaskCoreDataViewModel.save()
                 } catch {
                     print(error)
                 }
@@ -87,7 +87,7 @@ struct CreateTaskCoreDataView_Previews: PreviewProvider {
    static var previews: some View {
        let preview = TaskCoreDataProvider.shared
        
-       CreateTaskCoreDataView(vm: .init(provider: preview))
+       CreateTaskCoreDataView(editTaskCoreDataViewModel: .init(provider: preview))
            .environment(\.managedObjectContext, preview.viewContext)
    }
 }

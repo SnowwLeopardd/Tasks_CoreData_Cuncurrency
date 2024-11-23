@@ -32,21 +32,17 @@ final class TaskCoreData: NSManagedObject, Identifiable {
 }
 
 extension TaskCoreData {
-    
-    private static var tasksCoreDataFetchRequest: NSFetchRequest<TaskCoreData> {
-        NSFetchRequest(entityName: "TaskCoreData")
-    }
-    
     static func all() -> NSFetchRequest<TaskCoreData> {
-        let request: NSFetchRequest<TaskCoreData> = tasksCoreDataFetchRequest
+        let request: NSFetchRequest<TaskCoreData> = NSFetchRequest(entityName: "TaskCoreData")
         request.sortDescriptors = [
-            NSSortDescriptor(keyPath: \TaskCoreData.title, ascending: true)
+            NSSortDescriptor(keyPath: \TaskCoreData.date, ascending: true)
         ]
         return request
     }
-    // to do
+    
     static func filter(_ query: String) -> NSPredicate {
-        query.isEmpty ? NSPredicate(value: true) : NSPredicate(format: "title CONTAINS[cd] %@", query)
+        query.isEmpty ? NSPredicate(value: true) :
+        NSPredicate(format: "(title CONTAINS[cd] %@) OR (todo CONTAINS[cd] %@)", query, query)
     }
 }
 
@@ -68,9 +64,5 @@ extension TaskCoreData {
     
     static func preview(context: NSManagedObjectContext = TaskCoreDataProvider.shared.viewContext) -> TaskCoreData {
         return makePreview(count: 1, in: context)[0]
-    }
-    
-    static func empty(context: NSManagedObjectContext = TaskCoreDataProvider.shared.viewContext) -> TaskCoreData {
-        return TaskCoreData(context: context)
     }
 }

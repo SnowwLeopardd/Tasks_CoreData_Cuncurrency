@@ -10,9 +10,20 @@
 		5351122C2CEFDBFA00686B04 /* TaskCoreData.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 5351122A2CEFDBFA00686B04 /* TaskCoreData.xcdatamodeld */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		535112BD2CF2827300686B04 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 535111FC2CEFCEF700686B04 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 535112032CEFCEF700686B04;
+			remoteInfo = Tasks_CoreDataConcurrency;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXFileReference section */
 		535112042CEFCEF700686B04 /* Tasks_CoreDataConcurrency.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Tasks_CoreDataConcurrency.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5351122B2CEFDBFA00686B04 /* TaskCoreData.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = TaskCoreData.xcdatamodel; sourceTree = "<group>"; };
+		535112B92CF2827300686B04 /* Tasks_Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Tasks_Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -21,10 +32,22 @@
 			path = Tasks_CoreDataConcurrency;
 			sourceTree = "<group>";
 		};
+		535112BA2CF2827300686B04 /* Tasks_Tests */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = Tasks_Tests;
+			sourceTree = "<group>";
+		};
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		535112012CEFCEF700686B04 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		535112B62CF2827300686B04 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -39,6 +62,7 @@
 			children = (
 				5351122A2CEFDBFA00686B04 /* TaskCoreData.xcdatamodeld */,
 				535112062CEFCEF700686B04 /* Tasks_CoreDataConcurrency */,
+				535112BA2CF2827300686B04 /* Tasks_Tests */,
 				535112052CEFCEF700686B04 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -47,6 +71,7 @@
 			isa = PBXGroup;
 			children = (
 				535112042CEFCEF700686B04 /* Tasks_CoreDataConcurrency.app */,
+				535112B92CF2827300686B04 /* Tasks_Tests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -76,6 +101,29 @@
 			productReference = 535112042CEFCEF700686B04 /* Tasks_CoreDataConcurrency.app */;
 			productType = "com.apple.product-type.application";
 		};
+		535112B82CF2827300686B04 /* Tasks_Tests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 535112BF2CF2827300686B04 /* Build configuration list for PBXNativeTarget "Tasks_Tests" */;
+			buildPhases = (
+				535112B52CF2827300686B04 /* Sources */,
+				535112B62CF2827300686B04 /* Frameworks */,
+				535112B72CF2827300686B04 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				535112BE2CF2827300686B04 /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				535112BA2CF2827300686B04 /* Tasks_Tests */,
+			);
+			name = Tasks_Tests;
+			packageProductDependencies = (
+			);
+			productName = Tasks_Tests;
+			productReference = 535112B92CF2827300686B04 /* Tasks_Tests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -89,6 +137,10 @@
 					535112032CEFCEF700686B04 = {
 						CreatedOnToolsVersion = 16.1;
 					};
+					535112B82CF2827300686B04 = {
+						CreatedOnToolsVersion = 16.1;
+						TestTargetID = 535112032CEFCEF700686B04;
+					};
 				};
 			};
 			buildConfigurationList = 535111FF2CEFCEF700686B04 /* Build configuration list for PBXProject "Tasks_CoreDataConcurrency" */;
@@ -97,6 +149,7 @@
 			knownRegions = (
 				en,
 				Base,
+				ru,
 			);
 			mainGroup = 535111FB2CEFCEF700686B04;
 			minimizedProjectReferenceProxies = 1;
@@ -106,12 +159,20 @@
 			projectRoot = "";
 			targets = (
 				535112032CEFCEF700686B04 /* Tasks_CoreDataConcurrency */,
+				535112B82CF2827300686B04 /* Tasks_Tests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
 		535112022CEFCEF700686B04 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		535112B72CF2827300686B04 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -129,7 +190,22 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		535112B52CF2827300686B04 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		535112BE2CF2827300686B04 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 535112032CEFCEF700686B04 /* Tasks_CoreDataConcurrency */;
+			targetProxy = 535112BD2CF2827300686B04 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		535112102CEFCEF900686B04 /* Debug */ = {
@@ -191,6 +267,7 @@
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
@@ -247,6 +324,7 @@
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
 				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_EMIT_LOC_STRINGS = YES;
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
@@ -317,6 +395,42 @@
 			};
 			name = Release;
 		};
+		535112C02CF2827300686B04 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 45MD6RLHYP;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "me.Bochkarev.Alex.Tasks-Tests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Tasks_CoreDataConcurrency.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Tasks_CoreDataConcurrency";
+			};
+			name = Debug;
+		};
+		535112C12CF2827300686B04 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 45MD6RLHYP;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "me.Bochkarev.Alex.Tasks-Tests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Tasks_CoreDataConcurrency.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Tasks_CoreDataConcurrency";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -334,6 +448,15 @@
 			buildConfigurations = (
 				535112132CEFCEF900686B04 /* Debug */,
 				535112142CEFCEF900686B04 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		535112BF2CF2827300686B04 /* Build configuration list for PBXNativeTarget "Tasks_Tests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				535112C02CF2827300686B04 /* Debug */,
+				535112C12CF2827300686B04 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

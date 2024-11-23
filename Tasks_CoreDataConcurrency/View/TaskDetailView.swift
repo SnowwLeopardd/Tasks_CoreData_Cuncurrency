@@ -10,10 +10,8 @@ import SwiftUI
 struct TaskDetailView: View {
     @Binding var path: [TaskCoreData]
     
-    @Environment(\.managedObjectContext) private var moc
-    
     @ObservedObject var taskCoreData: TaskCoreData
-    @ObservedObject var vm: EditTaskCoreDataViewModel
+    @ObservedObject var editTaskCoreDataViewModel: EditTaskCoreDataViewModel
     
     var body: some View {
         VStack(alignment: .leading) {
@@ -35,9 +33,7 @@ private extension TaskDetailView {
     func saveChanges() {
         
         do {
-            if moc.hasChanges {
-                try moc.save()
-            }
+            try editTaskCoreDataViewModel.save()
         } catch {
             print(error)
         }
@@ -49,6 +45,6 @@ struct TaskDetailView_Previews: PreviewProvider {
     @State static var mockTasks: [TaskCoreData] = [.preview()]
 
        static var previews: some View {
-           TaskDetailView(path: $mockTasks, taskCoreData: .preview(), vm: .init(provider: TaskCoreDataProvider.shared))
+           TaskDetailView(path: $mockTasks, taskCoreData: .preview(), editTaskCoreDataViewModel: .init(provider: TaskCoreDataProvider.shared))
        }
 }

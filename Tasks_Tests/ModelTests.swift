@@ -1,35 +1,95 @@
-//
-//  ModelTests.swift
-//  Tasks_Tests
-//
-//  Created by Aleksandr Bochkarev on 11/23/24.
-//
-
 import XCTest
+import CoreData
+@testable import Tasks_CoreDataConcurrency
 
-final class ModelTests: XCTestCase {
+final class TaskCoreDataTests: XCTestCase {
+    var provider: TaskCoreDataProvider!
+    var context: NSManagedObjectContext!
 
-    override func setUpWithError() throws {
-        // Put setup code here. This method is called before the invocation of each test method in the class.
+    override func setUp() {
+        // Initialize Core Data provider and context
+        provider = TaskCoreDataProvider.shared
+        context = provider.backroundContext
     }
 
-    override func tearDownWithError() throws {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
+    override func tearDown() {
+        // Clean up
+        provider = nil
+        context = nil
+        
     }
 
-    func testExample() throws {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
-        // Any test you write for XCTest can be annotated as throws and async.
-        // Mark your test throws to produce an unexpected failure when your test encounters an uncaught error.
-        // Mark your test async to allow awaiting for asynchronous code to complete. Check the results with assertions afterwards.
+    func testCreateTask() throws {
+        // Given
+        let initialCount = try context.count(for: TaskCoreData.all())
+
+        // When
+        let task = TaskCoreData(context: context)
+        task.apiId = 5678
+        task.title = "Test Task"
+        task.todo = "Test Todo"
+        task.date = Date()
+        task.userId = 1234
+
+        try provider.save(in: context)
+
+        // Then
+        let finalCount = try context.count(for: TaskCoreData.all())
+        XCTAssertEqual(finalCount, initialCount + 1, "Task should be successfully created.")
     }
 
-    func testPerformanceExample() throws {
-        // This is an example of a performance test case.
-        self.measure {
-            // Put the code you want to measure the time of here.
-        }
+    func testReadTask() throws {
+        // Given
+        let task = TaskCoreData(context: context)
+        task.title = "Read Test"
+        task.todo = "Read Test Todo"
+        try provider.save(in: context)
+
+        // When
+        let request = TaskCoreData.all()
+        request.predicate = TaskCoreData.filter("Read Test")
+        let results = try context.fetch(request)
+
+        // Then
+        XCTAssertEqual(results.count, 1, "Should fetch one task matching the title.")
+        XCTAssertEqual(results.first?.title, "Read Test", "Fetched task should match the created task.")
     }
 
+    func testUpdateTask() throws {
+        // Given
+        let task = TaskCoreData(context: context)
+        task.title = "Update Test"
+        task.todo = "Update Test Todo"
+        try provider.save(in: context)
+
+        // When
+        task.title = "Updated Title"
+        try provider.save(in: context)
+
+        // Then
+        let request = TaskCoreData.all()
+        request.predicate = TaskCoreData.filter("Updated Title")
+        let results = try context.fetch(request)
+        XCTAssertEqual(results.count, 1, "Updated task should be fetchable by new title.")
+        XCTAssertEqual(results.first?.title, "Updated Title", "Task title should be updated.")
+    }
+
+    func testDeleteTask() throws {
+        // Given
+        let task = TaskCoreData(context: context)
+        task.title = "Delete Test"
+        try provider.save(in: context)
+
+        let request = TaskCoreData.all()
+        request.predicate = TaskCoreData.filter("Delete Test")
+        let tasks = try context.fetch(request)
+        XCTAssertFalse(tasks.isEmpty, "Task should exist before deletion.")
+
+        // When
+        try provider.delete(task, in: context)
+
+        // Then
+        let remainingTasks = try context.fetch(request)
+        XCTAssertTrue(remainingTasks.isEmpty, "Task should be deleted.")
+    }
 }

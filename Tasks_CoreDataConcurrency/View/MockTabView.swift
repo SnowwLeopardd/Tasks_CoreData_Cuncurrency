@@ -22,7 +22,7 @@ struct MockTabView: View {
             
             Spacer()
             
-            NavigationLink(destination: CreateTaskCoreDataView(vm: .init(provider: provider))) {
+            NavigationLink(destination: CreateTaskCoreDataView(editTaskCoreDataViewModel: .init(provider: provider))) {
                 Image(systemName: "square.and.pencil")
                     .foregroundColor(.yellow)
             }
@@ -32,9 +32,8 @@ struct MockTabView: View {
     }
 }
 
-//struct MockTabView_Previews: PreviewProvider {
-//   static var previews: some View {
-//       let preview = TaskCoreDataProvider.shared
-//       MockTabView(provider: preview)
-//   }
-//}
+struct MockTabView_Previews: PreviewProvider {
+   static var previews: some View {
+       MockTabView()
+   }
+}

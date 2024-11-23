@@ -11,9 +11,9 @@ import SwiftUI
 struct Tasks_CoreDataConcurrencyApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
-                // inject viewContext into Environment
+            ContentView(editTaskCoreDataViewModel: .init(provider: TaskCoreDataProvider.shared))
                 .environment(\.managedObjectContext, TaskCoreDataProvider.shared.viewContext)
+                .preferredColorScheme(.dark)
         }
     }
 }
